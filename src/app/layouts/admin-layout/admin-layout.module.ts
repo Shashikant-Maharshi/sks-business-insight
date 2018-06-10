@@ -13,6 +13,8 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { SqliteexampleComponent } from '../../sqliteexample/sqliteexample.component';
+import { SqliteexampleService } from '../../sqliteexample/sqliteexample.service';
 
 @NgModule({
   imports: [
@@ -31,7 +33,8 @@ import { ToastrModule } from 'ngx-toastr';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-  ]
+    SqliteexampleComponent
+  ],
+  providers: [SqliteexampleService]
 })
-
 export class AdminLayoutModule {}
