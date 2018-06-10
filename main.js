@@ -1,14 +1,22 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
+const DB = require('./src/database/db');
+const dbOperators = DB();
 
-let win;
+let mainWindow;
 
 function createWindow() {
-  win = new BrowserWindow({ width: 800, height: 600 });
+  mainWindow = new BrowserWindow({
+    //fullscreen: true,
+    width: 800,
+    height: 600,
+    show: false,
+    icon: path.join(__dirname, 'src/assets/img/shri-krishna.jpg')
+  });
 
   // load the dist folder from Angular
-  win.loadURL(
+  mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, 'dist/index.html'),
       protocol: 'file:',
@@ -16,11 +24,17 @@ function createWindow() {
     })
   );
 
-  // Open the DevTools optionally:
-  // win.webContents.openDevTools()
+  mainWindow.once('ready-to-show', () => mainWindow.show());
 
-  win.on('closed', () => {
-    win = null;
+  // Open the DevTools optionally:
+  //mainWindow.webContents.openDevTools();
+
+  ipcMain.on('mainWindowLoaded', () => {
+    dbOperators.init(mainWindow, ipcMain);
+  });
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
   });
 }
 
@@ -28,12 +42,13 @@ app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    dbOperators.closeSequelizeConnetion();
     app.quit();
   }
 });
 
 app.on('activate', () => {
-  if (win === null) {
+  if (mainWindow === null) {
     createWindow();
   }
 });

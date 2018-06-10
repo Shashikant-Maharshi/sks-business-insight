@@ -1,0 +1,83 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div id="articlePage" class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Save Article</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" placeholder="Title" [(ngModel)]="article.title" name="title">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Body</label>
+                  <input type="text" class="form-control" placeholder="Body" [(ngModel)]="article.body" name="body">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <button type="button" class="btn btn-info" (click)="saveArticle()">Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Article List</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th class="text-right">
+                  Id
+                </th>
+                <th>
+                  Title
+                </th>
+                <th>
+                  Body
+                </th>
+                <th>
+                  Created On
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let article of articles">
+                  <td class="text-right">
+                    {{article.id}}
+                  </td>
+                  <td>
+                    {{article.title}}
+                  </td>
+                  <td>
+                    {{article.body}}
+                  </td>
+                  <td>
+                    {{article.createdAt}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
