@@ -34,12 +34,8 @@ export const ROUTES: RouteInfo[] = [
     icon: 'text_caps-small',
     class: ''
   },
-  {
-    path: '/sqliteexample',
-    title: 'SQLite',
-    icon: 'design_app',
-    class: ''
-  }
+  { path: '/sqliteexample', title: 'SQLite', icon: 'design_app', class: '' },
+  { path: '/states', title: 'States', icon: 'design_app', class: '' }
 ];
 
 @Component({

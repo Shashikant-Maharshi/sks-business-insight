@@ -15,6 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { SqliteexampleComponent } from '../../sqliteexample/sqliteexample.component';
 import { SqliteexampleService } from '../../sqliteexample/sqliteexample.service';
+import { StatesComponent } from '../../states/states.component';
+import { StatesService } from '../../states/states.service';
 
 @NgModule({
   imports: [
@@ -33,8 +35,9 @@ import { SqliteexampleService } from '../../sqliteexample/sqliteexample.service'
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    SqliteexampleComponent
+    SqliteexampleComponent,
+    StatesComponent
   ],
-  providers: [SqliteexampleService]
+  providers: [SqliteexampleService, StatesService]
 })
 export class AdminLayoutModule {}

@@ -1,5 +1,6 @@
 const path = require('path');
 const Article = require('./operators/article');
+const States = require('./operators/states');
 
 // get constructor
 const Sequelize = require('sequelize');
@@ -13,6 +14,7 @@ const sequelizeConnetion = new Sequelize('null', 'null', 'null', {
 // initiate app schemas
 const init = (mainWindow, ipcMain) => {
   Article(Sequelize, sequelizeConnetion).init(mainWindow, ipcMain);
+  States(Sequelize, sequelizeConnetion).init(mainWindow, ipcMain);
 };
 
 // close all connections
