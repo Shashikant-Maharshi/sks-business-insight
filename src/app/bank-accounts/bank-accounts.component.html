@@ -1,0 +1,119 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div id="bankAccountPage" class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title" *ngIf="!isUpdate">Create Bank Account</h5>
+          <h5 class="title" *ngIf="isUpdate">Update Bank Account</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" placeholder="Name" [(ngModel)]="bankAccount.name" name="name">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Account Number</label>
+                  <input type="text" class="form-control" placeholder="Account Number" [(ngModel)]="bankAccount.accountNumber" name="accountNumber">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Branch</label>
+                  <input type="text" class="form-control" placeholder="Branch" [(ngModel)]="bankAccount.branch" name="branch">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>IFSC Code</label>
+                  <input type="text" class="form-control" placeholder="IFSC Code" [(ngModel)]="bankAccount.ifscCode" name="ifscCode">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <button type="button" class="btn btn-info" *ngIf="!isUpdate" (click)="save()">Save</button>
+                  <button type="button" class="btn btn-info" *ngIf="isUpdate" (click)="update()">Save</button>
+                  <button type="button" class="btn btn-info" *ngIf="isUpdate" (click)="cancel()">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Bank Account List</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th class="text-right">
+                  Id
+                </th>
+                <th class="text-left">
+                  Bank Name
+                </th>
+                <th class="text-left">
+                  Account Number
+                </th>
+                <th class="text-left">
+                  Branch
+                </th>
+                <th class="text-left">
+                  IFSC Code
+                </th>
+                <th class="text-right">
+                  Actions
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bankAccount of bankAccounts">
+                  <td class="text-right">
+                    {{bankAccount.id}}
+                  </td>
+                  <td class="text-left">
+                    {{bankAccount.name}}
+                  </td>
+                  <td class="text-left">
+                    {{bankAccount.accountNumber}}
+                  </td>
+                  <td class="text-left">
+                    {{bankAccount.branch}}
+                  </td>
+                  <td class="text-left">
+                    {{bankAccount.ifscCode}}
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit"
+                      (click)="edit(bankAccount)">
+                      <i class="now-ui-icons ui-2_settings-90"></i>
+                    </button>
+                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Delete"
+                      (click)="delete(bankAccount)">
+                      <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

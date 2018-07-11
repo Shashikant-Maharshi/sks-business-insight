@@ -1,0 +1,318 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div id="invoicePage" class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title" *ngIf="!isUpdate">Create Invoice</h5>
+          <h5 class="title" *ngIf="isUpdate">Update Invoice</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Company Profile</label>
+                  <select class="form-control" id="fkIdCompanyProfile" [(ngModel)]="invoice.fkIdCompanyProfile" name="fkIdCompanyProfile">
+                    <option *ngFor="let companyProfile of companyProfiles" [value]="companyProfile.id">{{companyProfile.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Buyer</label>
+                  <select class="form-control" id="fkIdBuyer" [(ngModel)]="invoice.fkIdBuyer" name="fkIdBuyer">
+                    <option *ngFor="let buyer of buyers" [value]="buyer.id">{{buyer.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Invoice Number</label>
+                  <input type="text" class="form-control" placeholder="Invoice Number" [(ngModel)]="invoice.invoiceNumber" name="invoiceNumber">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Invoice Date</label>
+                  <input type="date" class="form-control" [(ngModel)]="invoice.invoiceDate" name="invoiceDate">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Bill Type</label>
+                  <select class="form-control" id="fkIdBillType" [(ngModel)]="invoice.fkIdBillType" name="fkIdBillType">
+                    <option *ngFor="let billType of billTypes" [value]="billType.id">{{billType.type}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>eWay Bill Number</label>
+                  <input type="text" class="form-control" placeholder="eWay Bill Number" [(ngModel)]="invoice.eWayBillNumber" name="eWayBillNumber">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Delivery Note</label>
+                  <input type="text" class="form-control" placeholder="Delivery Note" [(ngModel)]="invoice.deliveryNote" name="deliveryNote">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Payment Mode</label>
+                  <input type="text" class="form-control" placeholder="Payment Mode" [(ngModel)]="invoice.paymentMode" name="paymentMode">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Supplier Reference</label>
+                  <input type="text" class="form-control" placeholder="Supplier Reference" [(ngModel)]="invoice.supplierReference" name="supplierReference">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Other References</label>
+                  <input type="text" class="form-control" placeholder="Other References" [(ngModel)]="invoice.otherReferences" name="otherReferences">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Despatch Document Number</label>
+                  <input type="text" class="form-control" placeholder="Despatch Document Number" [(ngModel)]="invoice.despatchDocumentNumber"
+                    name="despatchDocumentNumber">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Delivery Note Date</label>
+                  <input type="date" class="form-control" [(ngModel)]="invoice.deliveryNoteDate" name="deliveryNoteDate">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Despatch Through</label>
+                  <input type="text" class="form-control" placeholder="Despatch Through" [(ngModel)]="invoice.despatchThrough" name="despatchThrough">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Destination</label>
+                  <input type="text" class="form-control" placeholder="Destination" [(ngModel)]="invoice.destination" name="destination">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Terms Of Delivery</label>
+                  <input type="text" class="form-control" placeholder="Terms Of Delivery" [(ngModel)]="invoice.termsOfDelivery" name="termsOfDelivery">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Transport Charges</label>
+                  <input type="text" class="form-control" placeholder="Transport Charges" [(ngModel)]="invoice.transportCharges" name="transportCharges">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>CGST Rate (%)</label>
+                  <input type="text" class="form-control" placeholder="CGST Rate" [(ngModel)]="invoice.cgstRate" name="cgstRate">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>SGST Rate (%)</label>
+                  <input type="text" class="form-control" placeholder="SGST Rate" [(ngModel)]="invoice.sgstRate" name="sgstRate">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <button type="button" class="btn btn-info" *ngIf="!isUpdate" (click)="save()">Save</button>
+                  <button type="button" class="btn btn-info" *ngIf="isUpdate" (click)="update()">Save</button>
+                  <button type="button" class="btn btn-info" *ngIf="isUpdate" (click)="cancel()">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Invoice List</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th class="text-right">
+                  Id
+                </th>
+                <th class="text-left">
+                  Company Name
+                </th>
+                <th class="text-left">
+                  Buyer
+                </th>
+                <th class="text-left">
+                  Invoice No.
+                </th>
+                <th class="text-left">
+                  Invoice Date
+                </th>
+                <th class="text-left">
+                  Bill Type
+                </th>
+                <th class="text-left">
+                  eWay Bill No.
+                </th>
+                <th class="text-left">
+                  Delivery Note
+                </th>
+                <th class="text-left">
+                  Payment Mode
+                </th>
+                <th class="text-left">
+                  Supplier Reference
+                </th>
+                <th class="text-left">
+                  Other References
+                </th>
+                <th class="text-left">
+                  Despatch Document No.
+                </th>
+                <th class="text-left">
+                  Delivery Note Date
+                </th>
+                <th class="text-left">
+                  Despatch Through
+                </th>
+                <th class="text-left">
+                  Destination
+                </th>
+                <th class="text-left">
+                  Terms Of Delivery
+                </th>
+                <th class="text-right">
+                  Transport Charges
+                </th>
+                <th class="text-right">
+                  CGST Rate (%)
+                </th>
+                <th class="text-right">
+                  SGST Rate (%)
+                </th>
+                <th class="text-right">
+                  Actions
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let invoice of invoices">
+                  <td class="text-right">
+                    {{invoice.id}}
+                    <span></span>
+                  </td>
+                  <td class="text-left" *ngFor="let companyProfile of getCompanyProfile(invoice)">
+                    {{companyProfile.name}}
+                  </td>
+                  <td class="text-left" *ngFor="let buyer of getBuyer(invoice)">
+                    {{buyer.name}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.invoiceNumber}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.invoiceDate | formatDateTime:'LL'}}
+                  </td>
+                  <td class="text-left" *ngFor="let billType of getBillType(invoice)">
+                    {{billType.type}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.eWayBillNumber}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.deliveryNote}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.paymentMode}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.supplierReference}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.otherReferences}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.despatchDocumentNumber}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.deliveryNoteDate | formatDateTime:'LL'}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.despatchThrough}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.destination}}
+                  </td>
+                  <td class="text-left">
+                    {{invoice.termsOfDelivery}}
+                  </td>
+                  <td class="text-right">
+                    {{invoice.transportCharges}}
+                  </td>
+                  <td class="text-right">
+                    {{invoice.cgstRate}}
+                  </td>
+                  <td class="text-right">
+                    {{invoice.sgstRate}}
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="Edit" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit"
+                      (click)="edit(invoice)">
+                      <i class="now-ui-icons ui-2_settings-90"></i>
+                    </button>
+                    <button type="button" rel="tooltip" title="Delete" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Delete"
+                      (click)="delete(invoice)">
+                      <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </button>
+                    <button type="button" rel="tooltip" title="Purchase Entries ({{getPurcahseEntriesCount(invoice)}})" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral"
+                      [class.btn-success]="getPurcahseEntriesCount(invoice)" [class.btn-danger]="!getPurcahseEntriesCount(invoice)"
+                      data-original-title="Purchase Entries" [routerLink]="['/invoice', invoice.id, 'purchase-entries']">
+                      <i class="now-ui-icons files_paper"></i>
+                    </button>
+                    <button type="button" rel="tooltip" title="View Invoice" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral"
+                      data-original-title="View Invoice" [routerLink]="['/invoice-viewer', invoice.id]">
+                      <i class="now-ui-icons ui-1_zoom-bold"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

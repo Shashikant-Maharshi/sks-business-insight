@@ -1,0 +1,325 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content mx-5">
+  <div class="row">
+    <div class="col-md-12">
+      <div id="invoiceContent" #invoiceContent class="card">
+        <div class="card-header">
+          <h6 class="title text-right" *ngFor="let billType of getBillType(invoice)">({{billType.type}})</h6>
+          <h5 class="title text-center">TAX INVOICE</h5>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-6 border">
+              <div *ngFor="let companyProfile of getCompanyProfile(invoice)" class="text-left">
+                <b>{{companyProfile.name}}</b>
+                <div>{{companyProfile.address}}</div>
+                <div>GSTIN/UNI: {{companyProfile.gst}}</div>
+                <div>PAN/IT No.: {{companyProfile.pan}}</div>
+                <div *ngFor="let state of getState(companyProfile)">State: {{state.name}}, Code: {{state.code}}</div>
+              </div>
+              <div *ngFor="let buyer of getBuyer(invoice)" class="text-left">
+                <b>BUYER</b>
+                <div>{{buyer.name}}</div>
+                <div>{{buyer.address}}</div>
+                <div>GSTIN/UNI: {{buyer.gst}}</div>
+                <div *ngIf="buyer.pan">PAN/IT No.: {{buyer.pan}}</div>
+                <div *ngFor="let state of getState(buyer)">State: {{state.name}}, Code: {{state.code}}</div>
+                <div *ngIf="buyer.email">E-Mail: {{buyer.email}}</div>
+              </div>
+            </div>
+            <div class="col-md-6 border">
+              <div class="row">
+                <label class="col-md-4 title text-right">Invoice No.:</label>
+                <span class="col-md-8 text-left">{{invoice.invoiceNumber}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">Date:</label>
+                <span class="col-md-8 text-left">{{invoice.invoiceDate | formatDateTime:'LL'}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">E-Way Bill No.:</label>
+                <span class="col-md-8 text-left">{{invoice.eWayBillNumber}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">Deliver Note:</label>
+                <span class="col-md-8 text-left">{{invoice.deliveryNote}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">Payment:</label>
+                <span class="col-md-8 text-left">{{invoice.paymentMode}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">Supplier's Ref.:</label>
+                <span class="col-md-8 text-left">{{invoice.supplierReference}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">Other Reference(s):</label>
+                <span class="col-md-8 text-left">{{invoice.otherReferences}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">Dispatch Doc. No.:</label>
+                <span class="col-md-8 text-left">{{invoice.despatchDocumentNumber}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">Delivery Note Date:</label>
+                <span class="col-md-8 text-left">{{invoice.deliveryNoteDate | formatDateTime:'LL'}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">Despatch Through:</label>
+                <span class="col-md-8 text-left">{{invoice.despatchThrough}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">Destination:</label>
+                <span class="col-md-8 text-left">{{invoice.destination}}</span>
+              </div>
+              <div class="row">
+                <label class="col-md-4 title text-right">Terms of Delivery:</label>
+                <span class="col-md-8 text-left">{{invoice.termsOfDelivery}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                  <th class="text-right">
+                    NO. & KIND OF PACKS.
+                  </th>
+                  <th class="text-left">
+                    DESCRIPTION
+                  </th>
+                  <th class="text-right">
+                    HSN/SAC
+                  </th>
+                  <th class="text-right">
+                    QUANTITY
+                  </th>
+                  <th class="text-right">
+                    RATE PER(kgs)
+                  </th>
+                  <th class="text-right">
+                    DISCOUNT(%)
+                  </th>
+                  <th class="text-right">
+                    AMOUNT
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let purchaseEntry of purchaseEntries">
+                    <td class="text-right">
+                      {{purchaseEntry.packageNote}}
+                    </td>
+                    <td class="text-left">
+                      {{purchaseEntry.description}}
+                    </td>
+                    <td class="text-right">
+                      {{purchaseEntry.hsnCode}}
+                    </td>
+                    <td class="text-right">
+                      {{purchaseEntry.quantity}}
+                    </td>
+                    <td class="text-right">
+                      {{purchaseEntry.rate}}
+                    </td>
+                    <td class="text-right">
+                      {{purchaseEntry.discount}}
+                    </td>
+                    <td class="text-right">
+                      {{purchaseEntry.purchaseAmount}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 text-right">
+              <b>ADDED TRANSPORT CHARGE :</b>
+            </div>
+            <div class="col-md-2 text-right">
+              {{invoice.transportCharges | number:'1.2-2'}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 text-right">
+              <b>SUBTOTAL :</b>
+            </div>
+            <div class="col-md-2 text-right">
+              {{invoiceSummary.subTotal | number:'1.2-2'}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 text-right">
+              <b>CGST ({{invoice.cgstRate}}%) :</b>
+            </div>
+            <div class="col-md-2 text-right">
+              {{invoiceSummary.cgstAmount | number:'1.2-2'}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 text-right">
+              <b>SGST ({{invoice.sgstRate}}%) :</b>
+            </div>
+            <div class="col-md-2 text-right">
+              {{invoiceSummary.sgstAmount | number:'1.2-2'}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 text-right">
+              <i>
+                <b>SALE ROUND OFF :</b>
+              </i>
+            </div>
+            <div class="col-md-2 text-right">
+              {{invoiceSummary.saleRoundOff | number:'1.2-2'}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 text-right">
+              <i>
+                <b>TOTAL :</b>
+              </i>
+            </div>
+            <div class="col-md-2 text-right">
+              {{invoiceSummary.total | number:'1.0-0'}}
+              <p>
+                <b>E. & O.E</b>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-left">
+              Amount Chargeable (in words):
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-left">
+              <b>INR {{invoiceSummary. totalInWords}}</b>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                  <th class="text-left">
+                    HSN/SAC
+                  </th>
+                  <th class="text-right">
+                    TAXABLE VALUE
+                  </th>
+                  <th class="text-right">
+                    CENTRAL TAX
+                  </th>
+                  <th class="text-right">
+                    STATE TAX
+                  </th>
+                  <th class="text-right">
+                    TOTAL TAX AMOUNT
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let purchaseEntry of purchaseEntries">
+                    <td class="text-left">
+                      {{purchaseEntry.hsnCode}}
+                    </td>
+                    <td class="text-right">
+                      {{invoiceSummary.subTotal | number:'1.2-2'}}
+                    </td>
+                    <td class="text-right">
+                      {{invoiceSummary.cgstAmount | number:'1.2-2'}}
+                    </td>
+                    <td class="text-right">
+                      {{invoiceSummary.sgstAmount | number:'1.2-2'}}
+                    </td>
+                    <td class="text-right">
+                      {{invoiceSummary.totalTaxAmount | number:'1.2-2'}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="text-right">
+                      <b>TOTAL</b>
+                    </td>
+                    <td class="text-right">
+                      <b>{{invoiceSummary.cgstAmount | number:'1.2-2'}}</b>
+                    </td>
+                    <td class="text-right">
+                      <b>{{invoiceSummary.sgstAmount | number:'1.2-2'}}</b>
+                    </td>
+                    <td class="text-right">
+                      <b>{{invoiceSummary.totalTaxAmount | number:'1.2-2'}}</b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-left">
+              Tax Amount (in words):
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-left">
+              <b>INR {{invoiceSummary.totalTaxAmountInWords}}</b>
+            </div>
+          </div>
+          <div class="row mt-2" *ngFor="let companyProfile of getCompanyProfile(invoice)">
+            <div class="col-md-8 text-left border">
+              <div>
+                <b>Company's Bank Details</b>
+              </div>
+              <hr>
+              <div *ngFor="let bankAccount of getBankAccount(companyProfile)">
+                <div class="row">
+                  <div class="col-md-3 text-right">
+                    Bank Name:
+                  </div>
+                  <div class="col-md-9 text-left">
+                    {{bankAccount.name}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 text-right">
+                    A/C Number:
+                  </div>
+                  <div class="col-md-9 text-left">
+                    {{bankAccount.accountNumber}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 text-right">
+                    Branch:
+                  </div>
+                  <div class="col-md-9 text-left">
+                    {{bankAccount.branch}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 text-right">
+                    IFSC Code:
+                  </div>
+                  <div class="col-md-9 text-left">
+                    {{bankAccount.ifscCode}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 text-right border">
+              <div>
+                for {{companyProfile.name}}
+              </div>
+              <div class="autorised-signatory">
+                Authorised Signatory
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-round" (click)="downloadTaxInvoice()">
+        <i class="now-ui-icons arrows-1_cloud-download-93"></i> Download Tax Invoice
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+table {
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+.autorised-signatory {
+  margin-top: 100px;
+}
+
+.border {
+  padding: 10px;
+  border: 1px solid black;
+}
+
+#invoiceContent {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px !important;
+  height: 297mm;
+  width: 210mm;
+
+  .table th {
+    padding: 0.25rem;
+  }
+
+  .row {
+    margin: 0px;
+  }
+}

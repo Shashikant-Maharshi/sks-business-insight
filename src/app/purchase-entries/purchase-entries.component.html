@@ -1,0 +1,155 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div id="purchaseEntryPage" class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title" *ngIf="!isUpdate">Create Purchase Entry
+            <span class="badge badge-pill badge-info" [routerLink]="['/invoices']">Invoice No. - {{invoice.invoiceNumber}}</span>
+          </h5>
+          <h5 class="title" *ngIf="isUpdate">Update Purchase Entry
+            <span class="badge badge-pill badge-info" [routerLink]="['/invoices']">Invoice No. - {{invoice.invoiceNumber}}</span>
+          </h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Package Note</label>
+                  <input type="text" class="form-control" placeholder="Package Note" [(ngModel)]="purchaseEntry.packageNote" name="packageNote">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="form-control" placeholder="Description" [(ngModel)]="purchaseEntry.description" name="description">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>HSN Code</label>
+                  <input type="text" class="form-control" placeholder="HSN Code" [(ngModel)]="purchaseEntry.hsnCode" name="hsnCode">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Quantity</label>
+                  <input type="text" class="form-control" placeholder="Quantity" [(ngModel)]="purchaseEntry.quantity" name="quantity">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Rate</label>
+                  <input type="text" class="form-control" placeholder="Rate" [(ngModel)]="purchaseEntry.rate" name="rate">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Discount</label>
+                  <input type="text" class="form-control" placeholder="Discount" [(ngModel)]="purchaseEntry.discount" name="discount">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <button type="button" class="btn btn-info" *ngIf="!isUpdate" (click)="save()">Save</button>
+                  <button type="button" class="btn btn-info" *ngIf="isUpdate" (click)="update()">Save</button>
+                  <button type="button" class="btn btn-info" *ngIf="isUpdate" (click)="cancel()">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Purchase Entry List</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th class="text-right">
+                  Id
+                </th>
+                <th class="text-left">
+                  Package Note
+                </th>
+                <th class="text-left">
+                  Description
+                </th>
+                <th class="text-left">
+                  HSN Code
+                </th>
+                <th class="text-right">
+                  Quantity
+                </th>
+                <th class="text-right">
+                  Rate
+                </th>
+                <th class="text-right">
+                  Discount
+                </th>
+                <th class="text-right">
+                  Purchase Amount
+                </th>
+                <th class="text-right">
+                  Actions
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let purchaseEntry of purchaseEntries">
+                  <td class="text-right">
+                    {{purchaseEntry.id}}
+                  </td>
+                  <td class="text-left">
+                    {{purchaseEntry.packageNote}}
+                  </td>
+                  <td class="text-left">
+                    {{purchaseEntry.description}}
+                  </td>
+                  <td class="text-left">
+                    {{purchaseEntry.hsnCode}}
+                  </td>
+                  <td class="text-right">
+                    {{purchaseEntry.quantity}}
+                  </td>
+                  <td class="text-right">
+                    {{purchaseEntry.rate}}
+                  </td>
+                  <td class="text-right">
+                    {{purchaseEntry.discount}}
+                  </td>
+                  <td class="text-right">
+                    {{purchaseEntry.purchaseAmount}}
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit"
+                      (click)="edit(purchaseEntry)">
+                      <i class="now-ui-icons ui-2_settings-90"></i>
+                    </button>
+                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Delete"
+                      (click)="delete(purchaseEntry)">
+                      <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

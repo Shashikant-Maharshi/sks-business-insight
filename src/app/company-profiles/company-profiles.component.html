@@ -1,0 +1,183 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div id="companyProfilePage" class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title" *ngIf="!isUpdate">Create Company Profile</h5>
+          <h5 class="title" *ngIf="isUpdate">Update Company Profile</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" placeholder="Name" [(ngModel)]="companyProfile.name" name="name">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" class="form-control" placeholder="Email" [(ngModel)]="companyProfile.email" name="email">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Mobile Number 1</label>
+                  <input type="text" class="form-control" placeholder="Mobile Number" [(ngModel)]="companyProfile.mobileNumber_1" name="mobileNumber_1">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Mobile Number 2</label>
+                  <input type="text" class="form-control" placeholder="Mobile Number" [(ngModel)]="companyProfile.mobileNumber_2" name="mobileNumber_2">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>GSTIN/UNI</label>
+                  <input type="text" class="form-control" placeholder="GSTIN/UNI" [(ngModel)]="companyProfile.gst" name="gst">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>PAN/IT Number</label>
+                  <input type="text" class="form-control" placeholder="PAN/IT Number" [(ngModel)]="companyProfile.pan" name="pan">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>State</label>
+                  <select class="form-control" id="fkIdState" [(ngModel)]="companyProfile.fkIdState" name="fkIdState">
+                    <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Bank Account</label>
+                  <select class="form-control" id="fkidBankAccount" [(ngModel)]="companyProfile.fkidBankAccount" name="fkidBankAccount">
+                    <option *ngFor="let bankAccount of bankAccounts" [value]="bankAccount.id">{{bankAccount.name}}({{bankAccount.accountNumber}})</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                  <label>Address</label>
+                  <textarea rows="3" class="form-control" placeholder="Address" [(ngModel)]="companyProfile.address" name="address"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <button type="button" class="btn btn-info" *ngIf="!isUpdate" (click)="save()">Save</button>
+                  <button type="button" class="btn btn-info" *ngIf="isUpdate" (click)="update()">Save</button>
+                  <button type="button" class="btn btn-info" *ngIf="isUpdate" (click)="cancel()">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Company Profile List</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th class="text-right">
+                  Id
+                </th>
+                <th class="text-left">
+                  Name
+                </th>
+                <th class="text-left">
+                  GSTIN/UNI
+                </th>
+                <th class="text-left">
+                  PAN/IT No.
+                </th>
+                <th class="text-left">
+                  Email
+                </th>
+                <th class="text-left">
+                  Mobile No's
+                </th>
+                <th class="text-left">
+                  State
+                </th>
+                <th class="text-left">
+                  Bank Account No.
+                </th>
+                <th class="text-left">
+                  Address
+                </th>
+                <th class="text-right">
+                  Actions
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let companyProfile of companyProfiles">
+                  <td class="text-right">
+                    {{companyProfile.id}}
+                  </td>
+                  <td class="text-left">
+                    {{companyProfile.name}}
+                  </td>
+                  <td class="text-left">
+                    {{companyProfile.gst}}
+                  </td>
+                  <td class="text-left">
+                    {{companyProfile.pan}}
+                  </td>
+                  <td class="text-left">
+                    {{companyProfile.email}}
+                  </td>
+                  <td class="text-left">
+                    {{companyProfile.mobileNumber_1}}, {{companyProfile.mobileNumber_2}}
+                  </td>
+                  <td class="text-left" *ngFor="let state of getState(companyProfile)">
+                    {{state.name}}
+                  </td>
+                  <td class="text-left" *ngFor="let bankAccount of getBankAccount(companyProfile)">
+                    {{bankAccount.name}} ({{bankAccount.accountNumber}})
+                  </td>
+                  <td class="text-left">
+                    {{companyProfile.address}}
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit"
+                      (click)="edit(companyProfile)">
+                      <i class="now-ui-icons ui-2_settings-90"></i>
+                    </button>
+                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Delete"
+                      (click)="delete(companyProfile)">
+                      <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
