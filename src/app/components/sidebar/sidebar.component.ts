@@ -35,7 +35,34 @@ export const ROUTES: RouteInfo[] = [
     class: ''
   },
   { path: '/sqliteexample', title: 'SQLite', icon: 'design_app', class: '' },
-  { path: '/states', title: 'States', icon: 'design_app', class: '' }
+  { path: '/states', title: 'States', icon: 'design_app', class: '' },
+  { path: '/bill-types', title: 'Bill Types', icon: 'design_app', class: '' },
+  {
+    path: '/bank-accounts',
+    title: 'Bank Accounts',
+    icon: 'design_app',
+    class: ''
+  },
+  {
+    path: '/company-profiles',
+    title: 'Company Profiles',
+    icon: 'design_app',
+    class: ''
+  },
+  { path: '/buyers', title: 'Buyers', icon: 'design_app', class: '' },
+  { path: '/invoices', title: 'Invoices', icon: 'design_app', class: '' },
+  {
+    path: '/purchase-entries',
+    title: 'Purchase Entries',
+    icon: 'design_app',
+    class: ''
+  },
+  {
+    path: '/invoice-summaries',
+    title: 'Invoice Summaries',
+    icon: 'design_app',
+    class: ''
+  }
 ];
 
 @Component({

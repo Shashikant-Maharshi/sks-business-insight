@@ -15,7 +15,17 @@ export class StatesService {
     this.ipc.send('loadStates');
     this.ipc.on('statesLoaded', (event, result) => {
       compRef.states = result;
-      document.getElementById('statePage').click();
+      const pageElement: any = document.getElementById('statePage');
+      if (pageElement !== null) {
+        pageElement.click();
+      }
+    });
+  }
+
+  getState(compRef: any, stateId: number): void {
+    this.ipc.send('getState', stateId);
+    this.ipc.on('stateRetrieved', (event, result) => {
+      compRef.state = result;
     });
   }
 

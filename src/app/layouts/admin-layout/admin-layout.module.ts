@@ -17,6 +17,22 @@ import { SqliteexampleComponent } from '../../sqliteexample/sqliteexample.compon
 import { SqliteexampleService } from '../../sqliteexample/sqliteexample.service';
 import { StatesComponent } from '../../states/states.component';
 import { StatesService } from '../../states/states.service';
+import { BillTypesComponent } from '../../bill-types/bill-types.component';
+import { BillTypesService } from '../../bill-types/bill-types.service';
+import { BankAccountsComponent } from '../../bank-accounts/bank-accounts.component';
+import { BankAccountsService } from '../../bank-accounts/bank-accounts.service';
+import { CompanyProfilesComponent } from '../../company-profiles/company-profiles.component';
+import { CompanyProfilesService } from '../../company-profiles/company-profiles.service';
+import { BuyersComponent } from '../../buyers/buyers.component';
+import { BuyersService } from '../../buyers/buyers.service';
+import { InvoicesComponent } from '../../invoices/invoices.component';
+import { InvoicesService } from '../../invoices/invoices.service';
+import { PurchaseEntriesComponent } from '../../purchase-entries/purchase-entries.component';
+import { PurchaseEntriesService } from '../../purchase-entries/purchase-entries.service';
+import { InvoiceSummariesComponent } from '../../invoice-summaries/invoice-summaries.component';
+import { InvoiceSummariesService } from '../../invoice-summaries/invoice-summaries.service';
+import { InvoiceViewerComponent } from '../../invoice-viewer/invoice-viewer.component';
+import { PipeModule } from '../../common/pipes/pipe.module';
 
 @NgModule({
   imports: [
@@ -25,6 +41,7 @@ import { StatesService } from '../../states/states.service';
     FormsModule,
     ChartsModule,
     NgbModule,
+    PipeModule,
     ToastrModule.forRoot()
   ],
   declarations: [
@@ -36,8 +53,26 @@ import { StatesService } from '../../states/states.service';
     MapsComponent,
     NotificationsComponent,
     SqliteexampleComponent,
-    StatesComponent
+    StatesComponent,
+    BillTypesComponent,
+    BankAccountsComponent,
+    CompanyProfilesComponent,
+    BuyersComponent,
+    InvoicesComponent,
+    PurchaseEntriesComponent,
+    InvoiceSummariesComponent,
+    InvoiceViewerComponent
   ],
-  providers: [SqliteexampleService, StatesService]
+  providers: [
+    SqliteexampleService,
+    StatesService,
+    BillTypesService,
+    BankAccountsService,
+    CompanyProfilesService,
+    BuyersService,
+    InvoicesService,
+    PurchaseEntriesService,
+    InvoiceSummariesService
+  ]
 })
 export class AdminLayoutModule {}

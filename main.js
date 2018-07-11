@@ -9,8 +9,10 @@ let mainWindow;
 function createWindow() {
   mainWindow = new BrowserWindow({
     //fullscreen: true,
-    width: 800,
-    height: 600,
+    // width: 800,
+    // height: 600,
+    width: 1920,
+    height: 673,
     show: false,
     icon: path.join(__dirname, 'src/assets/img/shri-krishna.jpg')
   });
@@ -27,7 +29,7 @@ function createWindow() {
   mainWindow.once('ready-to-show', () => mainWindow.show());
 
   // Open the DevTools optionally:
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   ipcMain.on('mainWindowLoaded', () => {
     dbOperators.init(mainWindow, ipcMain);

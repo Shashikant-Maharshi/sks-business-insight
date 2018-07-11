@@ -91,10 +91,8 @@ export class StatesComponent implements OnInit {
   }
 
   update(): void {
-    console.log(
-      `update called - name: ${this.state.name}, code: ${this.state.code}`
-    );
     this.statesService.update(this.state);
+    this.isUpdate = false;
     this.getStates();
     this.showNotification('success', 'state updated successfully.');
   }
@@ -112,7 +110,6 @@ export class StatesComponent implements OnInit {
   }
 
   delete(entry: State): void {
-    console.log(`delete called - name: ${entry.name}, code: ${entry.code}`);
     this.statesService.delete(entry);
     this.getStates();
     this.showNotification('success', 'state deleted successfully.');

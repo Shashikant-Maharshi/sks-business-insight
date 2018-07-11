@@ -1,4 +1,4 @@
-const schema = 'state';
+const schema = 'States';
 
 const stateModule = (orm, connection) => {
   let stateSchema;
@@ -67,6 +67,12 @@ const stateModule = (orm, connection) => {
     });
   }
 
+  function getState(stateId) {
+    return connection.sync().then(() => {
+      return stateSchema.find({ where: { id: stateId } });
+    });
+  }
+
   function registerSubscriberEvents(ipcMain) {
     ipcMain.on('insertState', (event, data) => {
       insertState(data);
@@ -87,6 +93,15 @@ const stateModule = (orm, connection) => {
         mainWindow.webContents.send(
           'statesLoaded',
           JSON.parse(JSON.stringify(states))
+        );
+      });
+    });
+
+    ipcMain.on('getState', (event, data) => {
+      getState(data).then(state => {
+        mainWindow.webContents.send(
+          'stateRetrieved',
+          JSON.parse(JSON.stringify(state))
         );
       });
     });

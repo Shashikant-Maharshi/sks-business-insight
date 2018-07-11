@@ -9,6 +9,14 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { SqliteexampleComponent } from '../../sqliteexample/sqliteexample.component';
 import { StatesComponent } from '../../states/states.component';
+import { BillTypesComponent } from '../../bill-types/bill-types.component';
+import { BankAccountsComponent } from '../../bank-accounts/bank-accounts.component';
+import { CompanyProfilesComponent } from '../../company-profiles/company-profiles.component';
+import { BuyersComponent } from '../../buyers/buyers.component';
+import { InvoicesComponent } from '../../invoices/invoices.component';
+import { PurchaseEntriesComponent } from '../../purchase-entries/purchase-entries.component';
+import { InvoiceSummariesComponent } from '../../invoice-summaries/invoice-summaries.component';
+import { InvoiceViewerComponent } from '../../invoice-viewer/invoice-viewer.component';
 
 export const AdminLayoutRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -19,5 +27,13 @@ export const AdminLayoutRoutes: Routes = [
   { path: 'maps', component: MapsComponent },
   { path: 'notifications', component: NotificationsComponent },
   { path: 'sqliteexample', component: SqliteexampleComponent },
-  { path: 'states', component: StatesComponent }
+  { path: 'states', component: StatesComponent },
+  { path: 'bill-types', component: BillTypesComponent },
+  { path: 'bank-accounts', component: BankAccountsComponent },
+  { path: 'company-profiles', component: CompanyProfilesComponent },
+  { path: 'buyers', component: BuyersComponent },
+  { path: 'invoices', component: InvoicesComponent },
+  { path: 'invoice/:id/purchase-entries', component: PurchaseEntriesComponent },
+  { path: 'invoice-summaries', component: InvoiceSummariesComponent },
+  { path: 'invoice-viewer/:id', component: InvoiceViewerComponent }
 ];
